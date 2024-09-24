@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Report 2</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Movie Report 2</h1>
+        <form class="m-4" method="get" action="/getreport2" id="getreport2">
+            <div class="form-row">
+                <div class="col-3 mb-3">
+                    <label for="PC" class="form-label">Production Compnay</label>
+                    <select class="form-control" id="PC" name="PC">
+                    </select>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">All Movies</button>
+            </div>
+        </form>
+
+        <table class="table table-striped" id="journalVolumeDataTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Movie ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Year of Release</th>
+                    <th scope="col">Length (mins)</th>
+                    <th scope="col">Plot Outline</th>
+                    <th scope="col">Genres</th>
+                    <th scope="col">Director</th>
+                    <th scope="col">Production Company </th>
+                </tr>
+            </thead>
+            <tbody id="report-table">
+                <!-- Table rows will be dynamically populated using JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            fetch('/addMovie')
+            .then(response => response.json())
+            .then(data => {
+              const select = document.getElementById('PC');
+              data.forEach(company => {
+                const option = document.createElement('option');
+                option.value = company.p_id;
+                option.textContent = company.p_name;
+                select.appendChild(option);
+              });
+            })
+            .catch(error => console.error('Error fetching production companies:', error));
+
+
+            const movieForm = document.getElementById('getreport2');
+            movieForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const formData = new FormData(movieForm);
+                const params = new URLSearchParams(formData);
+
+                fetch(`/getreport2?${params.toString()}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const reportTable = document.getElementById('report-table');
+                        reportTable.innerHTML = ''; // Clear existing rows
+
+                        data.forEach(movie => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${movie.m_id}</td>
+                                <td>${movie.title}</td>
+                                <td>${movie.year_of_release}</td>
+                                <td>${movie.length_minutes}</td>
+                                <td>${movie.plot_outline}</td>
+                                <td>${movie.genres}</td>
+                                <td>${movie.director_name}</td>
+                                <td>${movie.production_company_name}</td>
+                            `;
+                            reportTable.appendChild(row);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching movies:', error));
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <style>
+        .styled-heading {
+            font-family: 'Kelly Slab', serif;
+            /* Use Kelly Slab font */
+            font-size: 3rem;
+            /* Larger font size */
+            color: white;
+            /* White text color */
+            text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+            /* Black outline effect */
+            letter-spacing: 2px;
+            /* Increased letter spacing */
+            line-height: 1.2;
+            /* Adjusted line height */
+            text-align: center;
+            /* Center align text */
+            margin-bottom: 1rem;
+            /* Space below heading */
+        }
+
+        @keyframes moveLeft {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .moving-text {
+            animation: moveLeft 10s linear infinite;
+            /* Adjust duration and timing function as needed */
+        }
+
+        .p-4 {
+            position: relative;
+        }
+
+        .transform {
+            transition: transform 0.3s ease;
+        }
+
+        .p-4:hover .transform {
+            transform: scale(1.1);
+        }
+
+        .p-4:hover .hidden {
+            display: block;
+        }
+
+        .nav-box {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Semi-transparent black background */
+            padding: 0.5rem 1rem;
+            /* Padding inside the box */
+            border-radius: 8px;
+            /* Rounded corners */
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .nav-links a:hover {
+            color: #ccc;
+            /* Light gray on hover */
+        }
+    </style>
+</head>
+
+<body
+    style="background-image: url('img/bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <section class="text-gray-600 body-font">
+        <div class="nav-box">
+            <div class="nav-links">
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+        </div>
+        <div class="flex flex-col">
+            <div class="flex flex-col text-center w-full mb-12">
+                <h1 class="styled-heading sm:text-3xl text-2xl font-bold italic moving-text">WELCOME TO FILMVERSE</h1>
+            </div>
+        </div>
+        <!-- <div class="flex justify-end mr-4 mt-4">
+                <a href="about.html" class="text-white text-lg hover:text-gray-400">About</a>
+            </div> -->
+        <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
+            <div class="p-4 md:w-1/4 sm:mb-0 mb-6">
+                <div class="relative">
+                    <a href="addProductionCompany.html"
+                        class="block rounded-lg h-64 overflow-hidden border-4 border-black">
+                        <img alt="content"
+                            class="object-cover object-center h-full w-full transform scale-100 transition-transform duration-300 hover:scale-110"
+                            src="img/pc.jpg">
+                    </a>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <a href="addProductionCompany.html"
+                            class="text-white font-semibold bg-dark-violet border-2 border-black py-2 px-8 focus:outline-none hover:bg-dark-violet hover:text-white hover:border-white rounded text-lg">
+                            Add Production Company
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 md:w-1/4 sm:mb-0 mb-6">
+                <div class="relative">
+                    <a href="addMovie.html" class="block rounded-lg h-64 overflow-hidden border-4 border-black">
+                        <img alt="content"
+                            class="object-cover object-center h-full w-full transform scale-100 transition-transform duration-300 hover:scale-110"
+                            src="img/movie.jpg">
+                    </a>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <a href="addMovie.html"
+                            class="text-white font-semibold bg-dark-violet border-2 border-black py-2 px-8 focus:outline-none hover:bg-dark-violet hover:text-white hover:border-white rounded text-lg">
+                            Add Movie
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 md:w-1/4 sm:mb-0 mb-6">
+                <div class="relative">
+                    <a href="addActor.html" class="block rounded-lg h-64 overflow-hidden border-4 border-black">
+                        <img alt="content"
+                            class="object-cover object-center h-full w-full transform scale-100 transition-transform duration-300 hover:scale-110"
+                            src="img/actor.jpg">
+                    </a>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <a href="addActor.html"
+                            class="text-white font-semibold bg-dark-violet border-2 border-black py-2 px-8 focus:outline-none hover:bg-dark-violet hover:text-white hover:border-white rounded text-lg">
+                            Add Actor
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 md:w-1/4 sm:mb-0 mb-6">
+                <!-- <a href="addDirector.html" class="block rounded-lg h-64 overflow-hidden border-4 border-black">
+                        <img alt="content" class="object-cover object-center h-25 w-25" src="img/director.jpg">
+                    </a> -->
+                <div class="relative">
+                    <a href="addDirector.html" class="block rounded-lg h-64 overflow-hidden border-4 border-black">
+                        <img alt="content"
+                            class="object-cover object-center h-full w-full transform scale-100 transition-transform duration-300 hover:scale-110"
+                            src="img/director.jpg">
+                    </a>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <a href="addDirector.html"
+                            class="text-white font-semibold bg-dark-violet border-2 border-black py-2 px-8 focus:outline-none hover:bg-dark-violet hover:text-white hover:border-white rounded text-lg">
+                            Add Director
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <a href="report1.html"
+        class="text-white font-semibold bg-dark-violet border-2 border-black py-2 px-8 focus:outline-none hover:bg-dark-violet hover:text-white hover:border-white rounded text-lg">
+        Report 1
+    </a>
+    <a href="report2.html"
+        class="text-white font-semibold bg-dark-violet border-2 border-black py-2 px-8 focus:outline-none hover:bg-dark-violet hover:text-white hover:border-white rounded text-lg">
+        Report 2
+    </a>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Report</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Movie Report</h1>
+        <form class="m-4" method="get" action="/getreport1" id="getreport1">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="syear">From Year</label>
+                    <input type="number" class="form-control" id="syear" name="syear" min="1900" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="eyear">To Year</label>
+                    <input type="number" class="form-control" id="eyear" name="eyear" max="2024" required>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Check Movies</button>
+            </div>
+        </form>
+
+        <table class="table table-striped" id="journalVolumeDataTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Movie ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Year of Release</th>
+                    <th scope="col">Length (mins)</th>
+                    <th scope="col">Plot Outline</th>
+                    <th scope="col">Genres</th>
+                    <th scope="col">Director</th>
+                    <th scope="col">Production Company</th>
+                </tr>
+            </thead>
+            <tbody id="report-table">
+                <!-- Table rows will be dynamically populated using JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const movieForm = document.getElementById('getreport1');
+            movieForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const formData = new FormData(movieForm);
+                const params = new URLSearchParams(formData);
+
+                fetch(`/getreport1?${params.toString()}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const reportTable = document.getElementById('report-table');
+                        reportTable.innerHTML = ''; // Clear existing rows
+
+                        data.forEach(movie => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${movie.m_id}</td>
+                                <td>${movie.title}</td>
+                                <td>${movie.year_of_release}</td>
+                                <td>${movie.length_minute}</td>
+                                <td>${movie.plot_outline}</td>
+                                <td>${movie.genres}</td>
+                                <td>${movie.director_name}</td>
+                                <td>${movie.production_company}</td>
+                            `;
+                            reportTable.appendChild(row);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching movies:', error));
+            });
+        });
+    </script>
+</body>
+</html>

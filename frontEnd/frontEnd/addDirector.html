@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <style>
+        .styled-heading {
+            font-family: 'Kelly Slab', serif; /* Use Kelly Slab font */
+            font-size: 3rem; /* Larger font size */
+            color: white; /* White text color */
+            text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; /* Black outline effect */
+            letter-spacing: 2px; /* Increased letter spacing */
+            line-height: 1.2; /* Adjusted line height */
+            text-align: center; /* Center align text */
+            margin-bottom: 1rem; /* Space below heading */
+        }
+        .m-4{
+            color:rgb(255, 255, 255);
+        }
+    </style>
+</head>
+
+<body style="background-image: url('img/bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <h1 class="styled-heading sm:text-3xl text-2xl font-bold italic moving-text">Director Form</h1>
+    <form class="m-4" method="post" action="/insertDirector">
+        <h3 class="m-4">Director Personal Information</h3>
+        <div class="row">
+            <div class="col-3 mb-3">
+                <label for="Dname" class="form-label">Director Name</label>
+                <input type="text" class="form-control" id="Dname" name="Dname" required>
+            </div>
+            <div class="col-6 mb-3">
+                <label for="Ddob" class="form-label">Director DOB</label>
+                <input type="date" class="form-control" id="Ddob" name="Ddob" required>
+            </div>
+            <div class="col-3 mb-3">
+                <label for="Dgender" class="form-label">Gender</label>
+                <select class="form-control" id="Dgender" name="Dgender" required>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="T">Trans</option>
+                    <option value="O">Other</option>
+                </select>
+            </div>
+            <div class="col-6 mb-3">
+                <label for="Daddress" class="form-label">Address</label>
+                <input type="text" class="form-control" id="Daddress" name="Daddress">
+            </div>
+        </div>
+        <h3 class="m-4">Director Movie Information</h3>
+        
+        <div class="container mt-5">
+            <div id="movie-fields">
+                <div class="form-group row">
+                    <label for="movie" class="col-sm-6 col-form-label input__label">Movie <span class="mandatory">*</span></label>
+                    <div class="col-sm-6">
+                        <div class="col-3 mb-3">
+                            <label for="movie" class="form-label">Movie</label>
+                            <select class="form-control" id="movie" name="movie[]">
+                            </select>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="add-movie" class="btn btn-success btn-style" role="button">Add</div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-success">Register Director</button>
+        </div>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/addActor')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('movie');
+                    data.forEach(movie => {
+                        const option = document.createElement('option');
+                        option.value = movie.m_id;
+                        option.textContent = movie.title;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching movies:', error));
+        });
+
+        $(document).on('click', '#add-movie', function () {
+            const newMovieField = `
+                <div class="form-group row">
+                    <label for="movie" class="col-sm-6 col-form-label input__label">Movie <span class="mandatory">*</span></label>
+                    <div class="col-sm-6">
+                        <div class="col-3 mb-3">
+                            <label for="movie" class="form-label">Movie</label>
+                            <select class="form-control movie" name="movie[]"></select>
+                        </div>
+                    </div>
+                </div>`;
+            $("#movie-fields").append(newMovieField);
+
+            fetch('/addActor')
+            .then(response => response.json())
+            .then(data => {
+                const selects = document.getElementsByClassName('movie');
+                const latestSelect = selects[selects.length - 1];
+                data.forEach(movie => {
+                    const option = document.createElement('option');
+                    option.value = movie.m_id;
+                    option.textContent = movie.title;
+                    latestSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching movies:', error));
+        });
+    </script>
+</body>
+
+</html>

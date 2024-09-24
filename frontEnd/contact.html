@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <style>
+        .styled-heading {
+            font-family: 'Kelly Slab', serif; /* Use Kelly Slab font */
+            font-size: 3rem; /* Larger font size */
+            color: white; /* White text color */
+            text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; /* Black outline effect */
+            letter-spacing: 2px; /* Increased letter spacing */
+            line-height: 1.2; /* Adjusted line height */
+            text-align: center; /* Center align text */
+            margin-bottom: 1rem; /* Space below heading */
+        }
+
+        @keyframes moveLeft {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+    .moving-text {
+        animation: moveLeft 10s linear infinite; /* Adjust duration and timing function as needed */
+    }
+
+    .p-4 {
+        position: relative;
+    }
+
+    .transform {
+        transition: transform 0.3s ease;
+    }
+
+    .p-4:hover .transform {
+        transform: scale(1.1);
+    }
+
+    .p-4:hover .hidden {
+        display: block;
+    }
+    </style>
+</head>
+
+<body style="background-image: url('img/bg.jpg'); background-position: center; background-repeat: no-repeat; height:100%;">
+    <section class="text-gray-600 body-font">
+            <div class="flex flex-col">
+                <div class="flex flex-col text-center w-full mb-12">
+                    <h1 class="styled-heading sm:text-3xl text-2xl font-bold italic">CONTACT US</h1>
+                </div>
+            </div>
+            
+            
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <style>
+        .styled-heading {
+            font-family: 'Kelly Slab', serif; /* Use Kelly Slab font */
+            font-size: 3rem; /* Larger font size */
+            color: white; /* White text color */
+            text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; /* Black outline effect */
+            letter-spacing: 2px; /* Increased letter spacing */
+            line-height: 1.2; /* Adjusted line height */
+            text-align: center; /* Center align text */
+            margin-bottom: 1rem; /* Space below heading */
+        }
+
+        @keyframes moveLeft {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+    .moving-text {
+        animation: moveLeft 10s linear infinite; /* Adjust duration and timing function as needed */
+    }
+
+    .p-4 {
+        position: relative;
+    }
+
+    .transform {
+        transition: transform 0.3s ease;
+    }
+
+    .p-4:hover .transform {
+        transform: scale(1.1);
+    }
+
+    .p-4:hover .hidden {
+        display: block;
+    }
+
+    .fancy-text {
+        font-family: 'Kristen ITC', cursive; /* Use your fancy font here */
+        color: white; /* White text color */
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Black outline effect */
+    }
+    </style>
+</head>
+
+<body style="background-image: url('img/bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <section class="text-gray-600 body-font">
+            <div class="flex flex-col">
+                <div class="flex flex-col text-center w-full mb-12">
+                    <h1 class="styled-heading sm:text-3xl text-2xl font-bold italic">EXPLORE FILMVERSE</h1>
+                </div>
+            </div>
+            <h2 class="text-3xl font-bold text-white mb-6">About Us</h2>
+            <p class="text-lg leading-relaxed mb-4 fancy-text">
+                Welcome to FilmVerse, where passion meets creativity in the world of cinema. Established with a vision to redefine storytelling through film, we embark on a journey to captivate audiences worldwide. Our commitment lies in producing compelling narratives that resonate deeply, leveraging the synergy of talented directors, actors, and production teams.
+            </p>
+            
+            <p class="text-lg leading-relaxed mb-4 fancy-text">
+                At FilmVerse, we believe in the power of cinematic artistry to inspire, provoke thought, and evoke emotions. With a focus on quality and innovation, we strive to push boundaries and set new standards in the industry. Every project we undertake is a testament to our dedication to excellence and a testament to our commitment to excellence.
+            </p>
+            
+            <p class="text-lg leading-relaxed mb-4 fancy-text">
+                Explore our diverse portfolio, witness our dedication to craftsmanship, and join us as we continue to carve our path in the world of cinema.
+            </p>            
+    </section>
+</body>
+
+</html>
